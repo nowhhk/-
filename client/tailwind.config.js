@@ -3,6 +3,7 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      spacing: { 120: '30rem' },
       colors: {
         verydarkgrey: '#1b1b1b',
         darkgrey: '#4b4b4b',
@@ -27,19 +28,7 @@ module.exports = {
         paleblue: '#daeefe',
         white: '#ffffff',
         error: '#d71010',
-        blue: '#0f6cb2',
-        selectblue: '#0058FF',
-        darkblue: '#013aa7',
-        lightblue: '#DEEFF4',
-        skyblue: '#6BBEE8',
-        ivory: '#f8f8f8',
-        lightsky: '#e3e6ef',
-        breathesky: '#4c94d4',
-        verylightsky: '#f2f9ff',
-        darkbeige: '#848484',
-        purple: '#C2ACD8',
-        dippurple: '#7509D3',
-        lightpurple: '#DBB9FF',
+        blue: '#4D9FF0',
       },
     },
   },
