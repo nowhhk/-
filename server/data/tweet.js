@@ -1,7 +1,7 @@
 let tweets = [
   {
     id: '1',
-    text: '안녕하세요',
+    text: '안',
     createdAt: Date.now().toString(),
     name: 'hk',
     username: 'hhk',
