@@ -1,12 +1,13 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import Avatar from './Avatar';
 
 import EditForm from './EditForm';
 
-const TweetCard = ({ tweet }) => {
+const TweetCard = memo(({ tweet, onDelete, onUpdate, onUsernameClick }) => {
   const { id, username, name, url, text, createdAt } = tweet;
   const [editing, setEditing] = useState(false);
   const onClose = () => setEditing(false);
+
   return (
     <li className="w-full py-4 px-5 flex gap-x-2 hover:bg-modalgrey border-b">
       <Avatar url={url} name={name} />
@@ -14,13 +15,20 @@ const TweetCard = ({ tweet }) => {
         <div className="flex justify-between">
           <div className="flex items-end gap-x-1 font-bold">
             <span className="">{name}</span>
-            <span className="text-blue text-sm">@{username}</span>
+            <span onClick={onUsernameClick} className="text-blue text-sm">
+              @{username}
+            </span>
             <span className="text-grey text-xs">{createdAt}</span>
           </div>
-          <button className="text-xs font-bold text-blue">X</button>
+          <button
+            onClick={() => onDelete(id)}
+            className="text-xs font-bold text-blue"
+          >
+            X
+          </button>
         </div>
         {editing ? (
-          <EditForm tweet={tweet} onClose={onClose} />
+          <EditForm tweet={tweet} onClose={onClose} onUpdate={onUpdate} />
         ) : (
           <div>
             <p class="w-11/12">{text}</p>
@@ -35,6 +43,6 @@ const TweetCard = ({ tweet }) => {
       </div>
     </li>
   );
-};
+});
 
 export default TweetCard;

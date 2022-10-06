@@ -5,7 +5,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 function App({ tweetService }) {
   const history = useHistory();
   return (
-    <div class="flex flex-col items-center m-auto h-screen w-120 bg-ivory">
+    <div className="flex flex-col items-center m-auto h-screen w-120 bg-ivory">
       <Header />
       <Switch>
         (

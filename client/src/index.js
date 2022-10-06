@@ -5,9 +5,11 @@ import './tailwind.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import TweetService from './service/tweet';
+import HttpClient from './network/http';
 
 const baseURL = process.env.REACT_APP_BASE_URL;
-const tweetService = new TweetService(baseURL);
+const httpClient = new HttpClient(baseURL);
+const tweetService = new TweetService(httpClient);
 
 ReactDOM.render(
   <React.StrictMode>

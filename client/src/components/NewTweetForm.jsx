@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 
-const NewTweetForm = () => {
+const NewTweetForm = ({ tweetService, onError, onCreated }) => {
   const [tweet, setTweet] = useState('');
   const onChange = (event) => {
     setTweet(event.target.value);
   };
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    tweetService
+      .postTweet(tweet)
+      .then((created) => {
+        setTweet('');
+        onCreated(created);
+      })
+      .catch(onError);
+  };
+
   return (
-    <form className="my-4">
+    <form className="my-4" onSubmit={onSubmit}>
       <input
         type="text"
         value={tweet}
