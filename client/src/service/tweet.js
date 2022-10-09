@@ -18,27 +18,33 @@ export default class TweetService {
   //     },
   //   ];
 
-  constructor(http) {
+  constructor(http, tokenStorage) {
     this.http = http;
+    this.tokenStorage = tokenStorage;
   }
 
   async getTweets(username) {
     const query = username ? `?username=${username}` : '';
     return this.http.fetch(`/tweets${query}`, {
       method: 'GET',
+      headers: this.getHeaders(),
     });
   }
 
   async postTweet(text) {
+    console.log(text);
+
     return this.http.fetch(`/tweets`, {
       method: 'POST',
-      body: JSON.stringify({ text, username: 'nowhhk', name: 'kkk' }),
+      headers: this.getHeaders(),
+      body: JSON.stringify({ text, username: 'nowhhk', name: 'sdf' }),
     });
   }
 
   async deleteTweet(tweetId) {
     return this.http.fetch(`/tweets/${tweetId}`, {
       method: 'DELETE',
+      headers: this.getHeaders(),
     });
   }
 
@@ -46,6 +52,14 @@ export default class TweetService {
     return this.http.fetch(`/tweets/${tweetId}`, {
       method: 'PUT',
       body: JSON.stringify({ text }),
+      headers: this.getHeaders(),
     });
+  }
+
+  getHeaders() {
+    const token = this.tokenStorage.getToken();
+    return {
+      Authorization: `Bearer ${token}`,
+    };
   }
 }

@@ -12,7 +12,7 @@ let tweets = [
     text: '안녕하세요~~~~!!',
     createdAt: Date.now().toString(),
     name: 'hk',
-    username: 'bob',
+    username: 'nowhhk2',
     url: '',
   },
 ];
