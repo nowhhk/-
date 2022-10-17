@@ -4,7 +4,7 @@ import Banner from './Banner';
 import NewTweetForm from './NewTweetForm';
 import TweetCard from './TweetCard';
 
-const Tweets = ({ tweetService }) => {
+const Tweets = memo(({ tweetService }) => {
   const [tweets, setTweets] = useState([]);
   const [error, setError] = useState('');
   const history = useHistory();
@@ -13,11 +13,16 @@ const Tweets = ({ tweetService }) => {
     tweetService
       .getTweets()
       .then((tweets) => setTweets([...tweets]))
+      //   .then(() => console.log('14', tweets))
       .catch(onError);
   }, [tweetService]);
 
   const onCreated = (tweet) => {
-    setTweets((tweets) => [tweet, ...tweets]);
+    // setTweets((tweets) => [tweet, ...tweets]);
+    tweetService
+      .getTweets()
+      .then((tweets) => setTweets([...tweets]))
+      .catch((error) => setError(error.toString()));
   };
   const onDelete = (tweetId) =>
     tweetService
@@ -53,8 +58,7 @@ const Tweets = ({ tweetService }) => {
         onError={onError}
       />
       {error && <Banner text={error} isAlert={true} />}
-      {tweets.length === 0 && <p className="">No Tweets Yet</p>}
-      <ul className="w-full">
+      <ul className="w-full h-full overflow-y-auto">
         {tweets.map((tweet) => (
           <TweetCard
             key={tweet.id}
@@ -67,6 +71,6 @@ const Tweets = ({ tweetService }) => {
       </ul>
     </>
   );
-};
+});
 
 export default Tweets;
