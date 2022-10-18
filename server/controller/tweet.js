@@ -28,17 +28,29 @@ export async function createTweet(req, res, next) {
 export async function updateTweet(req, res, next) {
   const id = req.params.id;
   const text = req.body.text;
-  const tweet = await tweetRepository.update(text, id);
-  if (tweet) {
-    tweet.text = text;
-    res.status(200).json(tweet);
-  } else {
-    res.status(404).json({ message: `ID ${id} Not Found` });
+  const tweet = await tweetRepository.getById(id);
+  console.log(tweet);
+  if (!tweet) {
+    return res.status(404).json({ message: `Tweet not found: ${id}` });
   }
+  if (tweet.userId !== req.userId) {
+    return res.sendStatus(403);
+  }
+
+  const updated = await tweetRepository.update(id, text);
+
+  res.status(200).json(updated);
 }
 
 export async function deleteTweet(req, res, next) {
   const id = req.params.id;
+  const tweet = await tweetRepository.getById(id);
+  if (!tweet) {
+    return res.status(404).json({ message: `Tweet not found: ${id}` });
+  }
+  if (tweet.userId !== req.userId) {
+    return res.sendStatus(403);
+  }
   await tweetRepository.remove(id);
   res.sendStatus(204);
 }
