@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Banner from '../components/Banner';
 const Login = ({ onSignUp, onLogin }) => {
   const [signup, setSignup] = useState(false);
   const [username, setUsername] = useState('');
@@ -45,6 +46,7 @@ const Login = ({ onSignUp, onLogin }) => {
   };
   return (
     <>
+      <Banner text={text} isAlert={isAlert} />
       <form className="flex flex-col w-4/5 py-4 gap-y-3" onSubmit={onSubmit}>
         <input
           name="username"
@@ -104,7 +106,6 @@ const Login = ({ onSignUp, onLogin }) => {
             checked={signup}
           />
           <label htmlFor="signup" className="text-sm text-darkgrey">
-            {' '}
             가입하기
           </label>
         </div>

@@ -15,7 +15,10 @@ const TweetCard = memo(({ tweet, onDelete, onUpdate, onUsernameClick }) => {
         <div className="flex justify-between">
           <div className="flex items-end gap-x-1 font-bold">
             <span className="">{name}</span>
-            <span onClick={onUsernameClick} className="text-blue text-sm">
+            <span
+              onClick={() => onUsernameClick(tweet)}
+              className="text-blue text-sm"
+            >
               @{username}
             </span>
             <span className="text-grey text-xs">{createdAt}</span>

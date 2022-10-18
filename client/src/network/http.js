@@ -14,6 +14,8 @@ export default class HttpClient {
     let data;
     try {
       data = await res.json();
+
+      //   console.log(data);
     } catch (error) {
       //body가 없는경우
       console.error(error);
@@ -24,6 +26,7 @@ export default class HttpClient {
         data && data.message ? data.message : 'Something went wrong! 🤪';
       throw new Error(message);
     }
+
     return data;
   }
 }
