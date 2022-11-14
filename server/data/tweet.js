@@ -30,7 +30,6 @@ export async function create(text, userId) {
       userId,
     ])
     .then((result) => getById(result[0].insertId));
-  //   .then((result) => console.log(result[0]))
 }
 
 export async function update(id, text) {
