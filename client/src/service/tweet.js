@@ -8,14 +8,6 @@ export default class TweetService {
   //       username: 'nowhhk',
   //       url: 'https://image.msscdn.net/images/goods_img/20210512/1946985/1946985_9_500.jpg?t=20220531145931',
   //     },
-  //     {
-  //       id: 2,
-  //       text: '두번째 텍스트에요~ :)',
-  //       createdAt: '2021-09-10T04:20:57.000Z',
-  //       name: 'hk',
-  //       username: 'hkhkhkhk',
-  //       url: '',
-  //     },
   //   ];
 
   constructor(http, tokenStorage) {
@@ -32,12 +24,10 @@ export default class TweetService {
   }
 
   async postTweet(text) {
-    console.log(text);
-
     return this.http.fetch(`/tweets`, {
       method: 'POST',
+      body: JSON.stringify({ text }),
       headers: this.getHeaders(),
-      body: JSON.stringify({ text, username: 'nowhhk', name: 'sdf' }),
     });
   }
 
