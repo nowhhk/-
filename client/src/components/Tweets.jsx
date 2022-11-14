@@ -4,7 +4,7 @@ import Banner from './Banner';
 import NewTweetForm from './NewTweetForm';
 import TweetCard from './TweetCard';
 
-const Tweets = memo(({ tweetService }) => {
+const Tweets = memo(({ tweetService, user }) => {
   const [tweets, setTweets] = useState([]);
   const [error, setError] = useState('');
   const history = useHistory();
@@ -66,6 +66,7 @@ const Tweets = memo(({ tweetService }) => {
             onDelete={onDelete}
             onUpdate={onUpdate}
             onUsernameClick={onUsernameClick}
+            author={tweet.username === user.username}
           />
         ))}
       </ul>
