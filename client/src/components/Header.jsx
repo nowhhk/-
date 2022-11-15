@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-const Header = memo(({ onLogout, user }) => {
+const Header = memo(({ onLogout, user, onAllTweets, onMyTweets, filter }) => {
   return (
     <header className="w-full h-28 bg-boxgrey flex flex-col items-center justify-center gap-y-3">
       <div className="flex items-end">
@@ -11,8 +11,18 @@ const Header = memo(({ onLogout, user }) => {
 
       {user && (
         <nav className="flex gap-x-3 text-sm ">
-          <button className="border-b-2 border-blue">모든 트윗</button>
-          <button>내 트윗</button>
+          <button
+            onClick={onAllTweets}
+            className={filter === 'All' && 'border-b-2 border-blue'}
+          >
+            모든 트윗
+          </button>
+          <button
+            onClick={onMyTweets}
+            className={filter === 'My' && 'border-b-2 border-blue'}
+          >
+            내 트윗
+          </button>
 
           <button onClick={onLogout} className="">
             로그아웃

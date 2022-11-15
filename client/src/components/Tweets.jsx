@@ -4,21 +4,19 @@ import Banner from './Banner';
 import NewTweetForm from './NewTweetForm';
 import TweetCard from './TweetCard';
 
-const Tweets = memo(({ tweetService, user }) => {
+const Tweets = memo(({ tweetService, user, username }) => {
   const [tweets, setTweets] = useState([]);
   const [error, setError] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     tweetService
-      .getTweets()
+      .getTweets(username)
       .then((tweets) => setTweets([...tweets]))
-      //   .then(() => console.log('14', tweets))
       .catch(onError);
   }, [tweetService]);
 
   const onCreated = (tweet) => {
-    // setTweets((tweets) => [tweet, ...tweets]);
     tweetService
       .getTweets()
       .then((tweets) => setTweets([...tweets]))

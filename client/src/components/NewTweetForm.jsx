@@ -31,7 +31,7 @@ const NewTweetForm = ({ tweetService, onError, onCreated }) => {
       <button
         type="submit"
         className={`rounded-full px-2.5 py-1.5 bg-blue text-white fobt-bold ml-4
-          ${tweet.length <= 3 ? 'opacity-60' : 'opacity-100'}`}
+          ${tweet.length < 1 ? 'opacity-60' : 'opacity-100'}`}
       >
         Tweet
       </button>
