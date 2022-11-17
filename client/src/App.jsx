@@ -61,13 +61,16 @@ function App({ tweetService, authService }) {
           {!isAuthorized ? <Redirect to="/login" /> : <Redirect to="/" />}
 
           <Route path="/login">
-            <Login onSignUp={signUp} onLogin={logIn} />
+            {!isAuthorized && <Login onSignUp={signUp} onLogin={logIn} />}
           </Route>
+
           <Route exact path="/">
             <AllTweets tweetService={tweetService} user={user} />
           </Route>
           <Route exact path="/:username">
-            <MyTweets tweetService={tweetService} user={user} />
+            {isAuthorized && (
+              <MyTweets tweetService={tweetService} user={user} />
+            )}
           </Route>
         </>
         )
